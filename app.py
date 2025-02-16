@@ -1,4 +1,17 @@
 import streamlit as st
+import pandas as pd
+
+data = {
+    "Sleep": [8, 5, 6, 7, 6.5, 7.5, 4, 5.5, 8, 9, 5, 6],
+    "Exercise": [60, 20, 30, 45, 25, 50, 15, 35, 70, 80, 20, 40],
+    "Diet": [9, 4, 6, 8, 5, 8, 3, 7, 10, 9, 4, 6],
+    "Stress": [2, 7, 5, 3, 6, 4, 8, 5, 2, 3, 7, 4],
+    "Wellbeing": [1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1]
+}
+
+df = pd.DataFrame(data)
+
+
 st.title("💚 Human Wellbeing Prediction (Green AI)")
 
 # Show dataset
