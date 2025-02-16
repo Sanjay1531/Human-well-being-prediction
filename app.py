@@ -1,3 +1,4 @@
+import streamlit as st
 st.title("💚 Human Wellbeing Prediction (Green AI)")
 
 # Show dataset
