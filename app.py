@@ -1,6 +1,16 @@
-import streamlit as st
+import numpy as np
 import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
 
+# ------------------------------
+# 1. Load Specific Real-World Data
+# ------------------------------
 data = {
     "Sleep": [8, 5, 6, 7, 6.5, 7.5, 4, 5.5, 8, 9, 5, 6],
     "Exercise": [60, 20, 30, 45, 25, 50, 15, 35, 70, 80, 20, 40],
@@ -10,6 +20,30 @@ data = {
 }
 
 df = pd.DataFrame(data)
+
+# ------------------------------
+# 2. Data Preprocessing
+# ------------------------------
+X = df[['Sleep', 'Exercise', 'Diet', 'Stress']]
+y = df['Wellbeing']
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Normalize data
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# ------------------------------
+# 3. Train Logistic Regression Model
+# ------------------------------
+model = LogisticRegression()
+model.fit(X_train_scaled, y_train)
+
+# Model Evaluation
+y_pred = model.predict(X_test_scaled)
+accuracy = accuracy_score(y_test, y_pred)
 
 
 st.title("💚 Human Wellbeing Prediction (Green AI)")
